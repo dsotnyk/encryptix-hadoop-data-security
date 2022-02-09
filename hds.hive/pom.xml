@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>encryptix.hds</groupId>
+        <artifactId>hds.parent</artifactId>
+        <version>2.1.7-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>hds.hive</artifactId>
+    <name>Hadoop Data Security Hive module</name>
+
+    <properties>
+        <!-- MA production HIVE version -->
+        <hive.version>0.14.0.2.2.4.2-2</hive.version>
+        <!-- MA production Hadoop version -->
+        <hadoop.version>2.6.0.2.2.4.2-2</hadoop.version>
+        <!-- BouncyCastle -->
+        <bouncycastle.version>1.53</bouncycastle.version>
+    </properties>
+
+    <dependencies>
+
+        <!-- Encryption module -->
+        <dependency>
+            <groupId>encryptix.hds</groupId>
+            <artifactId>hds.encryption</artifactId>
+            <version>[${hds.encryption.version}]</version>
+        </dependency>
+
+        <!-- Test keys -->
+        <dependency>
+            <groupId>encryptix.hds</groupId>
+            <artifactId>hds.keys</artifactId>
+            <version>[${hds.keys.version}]</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- BouncyCastle Provider -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>${bouncycastle.version}</version>
+        </dependency>
+
+        <!-- BouncyCastle PKIX/CMS/EAC/PKCS/OCSP/TSP/OPENSSL -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk15on</artifactId>
+            <version>${bouncycastle.version}</version>
+        </dependency>
+
+        <!-- Hive and Hadoop -->
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-exec</artifactId>
+            <version>${hive.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>${hadoop.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-mapreduce-client-core</artifactId>
+            <version>${hadoop.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>templating-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-verion-class</id>
+                        <goals>
+                            <goal>filter-sources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+</project>
